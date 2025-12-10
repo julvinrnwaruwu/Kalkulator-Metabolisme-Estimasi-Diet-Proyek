@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kalkulator Metabolisme & Estimasi Diet</title>
+<!-- MathJax for professional formula rendering -->
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Link ke style -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="left">
+    <img src="logo.jpg" alt="Logo Kampus">
+    <div>
+      <div class="group">Turunan – Kelompok 1</div>
+      <div class="course">Kalkulus Diferensial</div>
+    </div>
+  </div>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<div class="social">
+    <a href="https://instagram.com/jlvnnw" target="_blank" class="instagram">
+        <i class="fab fa-instagram"></i>
+    </a>
+    <a href="https://wa.me/6281274330984" target="_blank" class="whatsapp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <a href=mailto:julvinrnwaruwu@gmail.com?subject=Pertanyaan&body=Halo%2C%20saya%20ingin%20bertanya... class="email">
+        <i class="fas fa-envelope"></i>
+    </a>
+</div>
+
+  </div>
+</header>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <h1>Kalkulator Metabolisme &amp; Estimasi Diet</h1>
+      <p class="sub">Analisis & prediksi estimasi kalori selama 7 hari serta Berat selama 30 hari.</p>
+
+      <!-- ================= Feature Box UI Premium ================= -->
+<div class="feature-box">
+    <div class="card-menu" data-open="panel-theory">
+        <span class="icon">🏠︎</span> <span>Teori & Rumus</span>
+    </div>
+    <div class="card-menu" data-open="panel-usage">
+        <span class="icon">📄</span> <span>Cara Penggunaan</span>
+    </div>
+    <div class="card-menu active" data-open="panel-test">
+        <span class="icon">📝</span> <span>Calorie Calculator</span>
+    </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Accordion panels -->
+    <section id="panel-theory" class="panel">
+      <h2>🏠︎ Teori & Rumus</h2>
+      <div class="panel-grid">
+        <article class="card">
+          <h3>Landasan Teori</h3>
+          <p>Basal Metabolic Rate (<b>BMR</b>) adalah jumlah energi minimum yang diperlukan tubuh untuk mempertahankan fungsi vital saat istirahat. 
+        Rumus ini mempertimbangkan <i>berat badan, tinggi badan, usia, dan jenis kelamin</code></p>
+          <p>Total Daily Energy Expenditure (<b>TDEE</b>) adalah total energi harian yang dikeluarkan tubuh termasuk aktivitas fisik. 
+        Nilai ini digunakan untuk menentukan kebutuhan kalori untuk <u>menjaga, menaikkan, atau menurunkan berat badan</u></code></p>
+          <p>Selisih kalori digunakan untuk melihat apakah tubuh berada dalam kondisi <b>defisit</b> (turun berat) atau <b>surplus</b> (naik berat).
+          <p> 📊 Grafik Asupan Kalori</p>
+          <p>Grafik ini menampilkan perbandingan antara kalori yang kamu konsumsi dan kalori yang dibakar tubuh setiap hari.
+        Tujuannya untuk memonitor apakah kamu sedang:</p>
+
+          <p>✦︎ Surplus kalori (+) → makan lebih banyak dari yang dibakar → potensi naik berat badan</p>
+        kalori (-) → makan lebih sedikit dari yang dibakar → potensi turun berat badan</p>
+
+          <p>✦︎ Seimbang (=) → intake sama dengan output → berat badan stabil</p>
+
+          <p>Dengan grafik ini kamu bisa melihat pola makan harian dan mengevaluasi apakah target dietmu sudah sesuai.</p>
+          <p>📅 Grafik Tren 30 Hari</p>
+
+          <p>Grafik ini menunjukkan perubahan asupan dan pengeluaran kalori dalam periode 30 hari ke belakang.
+        Fungsinya:</p>
+
+          <p>✦︎ Membantu melihat perkembangan diet secara jangka panjang</p>
+
+          <p>✦︎ Mengetahui hari mana kamu makan berlebihan atau kurang</p>
+
+          <p>✦︎ Mengukur konsistensi program diet</p>
+
+          <p>✦︎ Memudahkan evaluasi dan penyesuaian pola makan berikutnya</p>
+
+          <p>Semakin stabil grafik mendekati target, semakin baik kontrol nutrisi kamu.</p>
+          </article>
+
+        <article class="card">
+           <h2>Rumus BMR – TDEE – Selisih Kalori</h2>
+
+    <h3>1. Rumus BMR (Mifflin–St Jeor)</h3>
+
+    <p>Pria:</p>
+    <p>\[
+    BMR = (10 \times berat) + (6.25 \times tinggi) - (5 \times usia) + 5
+    \]</p>
+
+    <p>Wanita:</p>
+    <p>\[
+    BMR = (10 \times berat) + (6.25 \times tinggi) - (5 \times usia) - 161
+    \]</p>
+
+    <h3>2. Rumus TDEE</h3>
+    <p>\[
+    TDEE = BMR \times Faktor\ Aktivitas
+    \]</p>
+
+    <ul>
+        <li>1.2 — Tidak aktif / jarang olahraga</li>
+        <li>1.375 — Olahraga ringan (1–3x per minggu)</li>
+        <li>1.55 — Olahraga sedang (3–5x per minggu)</li>
+        <li>1.725 — Berolahraga berat (6–7x per minggu)</li>
+        <li>1.9 — Atlet/aktivitas sangat tinggi</li>
+    </ul>
+
+    <h3>3. Selisih Kalori</h3>
+    <p>\[
+    Selisih = Kalori\ Masuk - TDEE
+    \]</p>
+
+    <p>
+        Jika <b>Selisih &lt; 0</b> → Defisit Kalori (turun berat)<br>
+        Jika <b>Selisih &gt; 0</b> → Surplus Kalori (naik berat)
+    </p>
+        </article>
+
+        <article class="card">
+          <h3>Landasan Teori Kalkulus</h3>
+          <p> Dalam kalkulus, perubahan berat badan dapat dimodelkan melalui selisih kalori sebagai fungsi waktu. 
+        Laju perubahan berat badan dapat digambarkan menggunakan turunan:
+    </p>
+
+    <p>\[
+    \frac{dW}{dt} = k (C_{in} - C_{out})
+    \]</p>
+
+    <p>
+        Sedangkan total perubahan energi dalam periode tertentu dapat dihitung menggunakan integral:
+    </p>
+
+    <p>\[
+    \Delta E = \int_0^T (C_{in} - TDEE)\, dt
+    \]</p>
+
+    <p>
+        Ini menunjukkan bahwa penurunan atau kenaikan berat bukan hanya dari nilai harian, tetapi akumulasi energi sepanjang waktu.
+    </p>
+</section></p>
+        </article>
+      </div>
+    </section>
+
+    <section id="panel-usage" class="panel">
+    <h2>Cara Penggunaan Kalkulator Metabolisme & Diet</h2>
+    <p>
+        Kalkulator ini digunakan untuk menghitung <b>BMR</b> dan <b>TDEE</b> sebagai dasar estimasi kebutuhan kalori harian. 
+        Hasil perhitungan membantu menentukan strategi diet untuk <u>menurunkan</u>, <u>meningkatkan</u>, atau <u>mempertahankan</u> berat badan.
+    </p>
+
+    <div class="usage-steps">
+        <div class="step">
+            <span class="num">1</span>
+            <h3>Masukkan Data Diri</h3>
+            <p>Isi jenis kelamin, usia, berat badan (kg), dan tinggi badan (cm) pada form yang disediakan.</p>
+        </div>
+
+        <div class="step">
+            <span class="num">2</span>
+            <h3>Pilih Level Aktivitas</h3>
+            <p>Tentukan tingkat aktivitas harian mulai dari pasif hingga atlet. Nilai ini mempengaruhi perhitungan TDEE.</p>
+        </div>
+
+        <div class="step">
+            <span class="num">3</span>
+            <h3>Klik Hitung</h3>
+            <p>Sistem akan menampilkan nilai BMR, TDEE, dan rekomendasi kalori untuk turun/naik berat badan.</p>
+        </div>
+
+        <div class="step">
+            <span class="num">4</span>
+            <h3>Lihat Hasil & Rekomendasi</h3>
+            <p>Website akan memberikan saran kalori defisit surplus untuk tujuan diet pribadi kamu.</p>
+        </div>
+
+        <div class="step">
+            <span class="num">5</span>
+            <h3>Gunakan Untuk Monitoring</h3>
+            <p>Catat perubahan berat mingguan & sesuaikan kebutuhan kalori berdasarkan kondisi terbaru.</p>
+        </div>
+    </div>
+
+    <div class="tips-box">
+        <h3>Tips Penting 👇</h3>
+        <ul>
+            <li>Defisit ±300–500 kkal/hari → cocok untuk menurunkan berat badan.</li>
+            <li>Surplus ±250–400 kkal/hari → cocok untuk menaikkan massa tubuh.</li>
+            <li>Hasil merupakan estimasi edukasi, bukan diagnosis medis.</li>
+            <li>Konsistensi > kecepatan. Atur pola makan & aktivitas teratur.</li>
+        </ul>
+    </div>
+</section>
+
+    <section id="panel-test" class="panel active">
+      <h2>Form Input & Tes</h2>
+
+      <div class="grid-2">
+        <!-- kiri: form -->
+        <div class="card form-card">
+          <h3>Input</h3>
+
+          <!-- tiap baris: label-box + input-box -->
+          <div class="row">
+            <div class="label-box">Berat (kg)</div>
+            <input id="weight" class="input-box" type="number" min="1" placeholder="Berat (kg)">
+          </div>
+
+          <div class="row">
+            <div class="label-box">Tinggi (cm)</div>
+            <input id="height" class="input-box" type="number" min="1" placeholder="Tinggi (cm)">
+          </div>
+
+          <div class="row">
+            <div class="label-box">Usia</div>
+            <input id="age" class="input-box" type="number" min="0" placeholder="Usia">
+          </div>
+
+          <div class="row">
+            <div class="label-box">Jenis Kelamin</div>
+            <select id="gender" class="input-box">
+              <option value="male">Laki-laki</option>
+              <option value="female">Perempuan</option>
+            </select>
+          </div>
+
+          <div class="row">
+            <div class="label-box">Aktivitas</div>
+            <select id="activity" class="input-box">
+              <option value="1.2">Tidak Aktif (Tidak olahraga)</option>
+              <option value="1.375">Ringan (1-2x/minggu)</option>
+              <option value="1.55">Sedang (3-5x/minggu)</option>
+              <option value="1.725">Berat (6-7x/minggu)</option>
+              <option value="1.9">Atlet (2x latihan/hari)</option>
+            </select>
+          </div>
+
+          <div class="row">
+            <div class="label-box">Asupan Kalori/hari</div>
+            <input id="calorie" class="input-box" type="number" placeholder="Asupan Kalori (kCal)">
+          </div>
+
+          <div class="row">
+            <div class="label-box">Tujuan</div>
+            <select id="goal" class="input-box">
+              <option value="cutting">Diet (Turunkan berat)</option>
+              <option value="bulking">Bulking (Tambah berat)</option>
+            </select>
+          </div>
+
+          <div class="result-box">
+            <!-- Animated counters -->
+            <div><strong>BMR:</strong> <span id="bmrValue">—</span> KCal</div>
+            <div><strong>TDEE:</strong> <span id="tdeeValue">—</span> KCal/hari</div>
+            <div><strong>Selisih Kalori:</strong> <span id="diffValue">—</span> KCal</div>
+          </div>
+
+          <div class="actions">
+            <button id="calcBtn" class="btn primary">Hitung</button>
+            <button id="resetBtn" class="btn ghost">Reset</button>
+          </div>
+        </div>
+
+        <!-- kanan: makanan & grafik trigger -->
+        <aside class="card info-card">
+          <h3>Kalori Makanan Pokok (perkiraan)</h3>
+          <ul class="food-list">
+            <li><strong>Nasi putih (100g):</strong> 130 kCal</li>
+            <li><strong>Nasi (1 piring ~200g):</strong> 260 kCal</li>
+            <li><strong>Dada ayam panggang (100g):</strong> 165 kCal</li>
+            <li><strong>Daging sapi (100g):</strong> 250 kCal</li>
+            <li><strong>Ikan (100g):</strong> 160 kCal</li>
+            <li><strong>Sayur (100g):</strong> 25 kCal</li>
+            <li><strong>Buah (100g rata2):</strong> 52 kCal</li>
+          </ul>
+
+          <h4>📊 Grafik</h4>
+          <p>Buka panel grafik untuk melihat estimasi kalori 7 hari & prediksi berat 30 hari.</p>
+          <div class="small-actions">
+            <button class="btn" data-open="panel-graphs">Buka Grafik</button>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Grafik panel (dijalankan saat dibuka) -->
+    <section id="panel-graphs" class="panel">
+      <h2>Grafik</h2>
+      <div class="chart-grid">
+        <div class="chart-card">
+          <h3>📊 Estimasi Kalori (7 Hari)</h3>
+          <div class="chart-box">
+            <canvas id="kaloriChart"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <h3>📅 Prediksi Berat (30 Hari)</h3>
+          <div class="chart-box">
+            <canvas id="weightChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <small>Proyek Kelompok 1 PSIK 25D, Simulasi Implementasi Turunan.</small>
+  </footer>
+
+<script>
+/* -------------------------
+  Utility + State
+------------------------- */
+const qs = v => document.querySelector(v);
+const qsa = v => document.querySelectorAll(v);
+
+let kaloriChart = null;
+let weightChart = null;
+
+/* Elements */
+const panels = qsa('.panel');
+const openButtons = qsa('[data-open]');
+
+const weightInput = qs('#weight');
+const heightInput = qs('#height');
+const ageInput = qs('#age');
+const genderInput = qs('#gender');
+const activityInput = qs('#activity');
+const calorieInput = qs('#calorie');
+const goalInput = qs('#goal');
+
+const bmrDisplay = qs('#bmrValue');
+const tdeeDisplay = qs('#tdeeValue');
+const diffDisplay = qs('#diffValue');
+
+const calcBtn = qs('#calcBtn');
+const resetBtn = qs('#resetBtn');
+
+/* --- Accordion / Panel open handling --- */
+function openPanel(id) {
+  panels.forEach(p => p.classList.remove('active'));
+  const el = qs('#' + id);
+  if (el) {
+    el.classList.add('active');
+    // Jika membuka panel grafik, inisialisasi chart jika belum ada
+    if (id === 'panel-graphs') {
+      initOrUpdateCharts(); // pasti dibuat / diupdate
+    }
+  }
+}
+openButtons.forEach(btn => {
+  btn.addEventListener('click', () => openPanel(btn.dataset.open));
+});
+
+/* -------------------------
+  Perhitungan BMR/TDEE + Animasi
+------------------------- */
+function calcBMR(w,h,a,gender){
+  if (!w || !h || !a) return 0;
+  if (gender === 'male') {
+    return 88.36 + (13.4 * w) + (4.8 * h) - (5.7 * a);
+  } else {
+    return 447.6 + (9.2 * w) + (3.1 * h) - (4.3 * a);
+  }
+}
+
+function animateValue(el, start, end, duration=600) {
+  // simple smooth counter using requestAnimationFrame
+  const range = end - start;
+  const startTime = performance.now();
+  function step(now) {
+    const progress = Math.min((now - startTime) / duration, 1);
+    const value = Math.round(start + range * easeOutCubic(progress));
+    el.textContent = isFinite(value) ? value : '—';
+    if (progress < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+function easeOutCubic(t){ return (--t)*t*t+1; }
+
+/* -------------------------
+  Chart functions
+------------------------- */
+function genKalori7days(tdee) {
+  // buat array 7 hari sekitar tdee dengan variasi kecil
+  const arr = [];
+  for (let i=0;i<7;i++){
+    const jitter = (Math.sin(i*1.3)+1)*0.03; // 0..0.06
+    arr.push(Math.round(tdee * (1 - 0.03 + jitter)));
+  }
+  return arr;
+}
+
+function genWeight30days(initialWeight, dailyCalDiff) {
+  // dailyCalDiff = tdee - intake (pos berarti surplus)
+  const arr = [];
+  let w = Number(initialWeight) || 0;
+  if (!w) { // jika belum ada berat, isi kosong
+    for (let i=0;i<30;i++) arr.push(null);
+    return arr;
+  }
+  const kgPerDay = (dailyCalDiff) / 7700; // bisa negatif
+  for (let i=0;i<30;i++){
+    w = w + kgPerDay;
+    // round to 1 decimal
+    arr.push(Number(w.toFixed(1)));
+  }
+  return arr;
+}
+
+function initOrUpdateCharts() {
+  const w = Number(weightInput.value) || 0;
+  const h = Number(heightInput.value) || 0;
+  const a = Number(ageInput.value) || 0;
+  const gender = genderInput.value;
+  const activity = Number(activityInput.value) || 1.2;
+  const intake = Number(calorieInput.value) || 0;
+
+  const bmr = calcBMR(w,h,a,gender);
+  const tdee = bmr * activity;
+  const diff = Math.round(tdee - intake);
+
+  // generate data
+  const kaloriData = genKalori7days(tdee || 0);
+  const weightData = genWeight30days(w, diff);
+
+  // Kalori chart
+  const kaloriCtx = qs('#kaloriChart').getContext('2d');
+  if (kaloriChart) {
+    kaloriChart.data.datasets[0].data = kaloriData;
+    kaloriChart.update();
+  } else {
+    kaloriChart = new Chart(kaloriCtx, {
+      type: 'line',
+      data: {
+        labels: ['Hari 1','Hari 2','Hari 3','Hari 4','Hari 5','Hari 6','Hari 7'],
+        datasets: [{
+          label: 'Estimasi Kalori Terbakar',
+          data: kaloriData,
+          borderColor: '#4aa2e9',
+          backgroundColor: 'rgba(74,162,233,0.12)',
+          tension: 0.4,
+          pointRadius: 4,
+          pointBackgroundColor: '#fff',
+          borderWidth: 2,
+          fill: true
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { labels: { color: '#e6eef8' } } },
+        scales: {
+          x: { ticks: { color: '#cfdff0' }, grid: { color: 'rgba(255,255,255,0.03)' } },
+          y: { ticks: { color: '#cfdff0' }, grid: { color: 'rgba(255,255,255,0.03)' } }
+        }
+      }
+    });
+  }
+
+  // Weight chart
+  const weightCtx = qs('#weightChart').getContext('2d');
+  if (weightChart) {
+    weightChart.data.datasets[0].data = weightData;
+    weightChart.update();
+  } else {
+    weightChart = new Chart(weightCtx, {
+      type: 'line',
+      data: {
+        labels: Array.from({length:30},(_,i)=>`Hari ${i+1}`),
+        datasets: [{
+          label: 'Prediksi Berat (kg)',
+          data: weightData,
+          borderColor: '#ffd166',
+          backgroundColor: 'rgba(255,209,102,0.06)',
+          tension: 0.35,
+          pointRadius: 3,
+          borderWidth: 2,
+          fill: true
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { labels: { color: '#f7faff' } } },
+        scales: {
+          x: { ticks: { color: '#e6eef8' }, grid: { color: 'rgba(255,255,255,0.03)' } },
+          y: { ticks: { color: '#e6eef8' }, grid: { color: 'rgba(255,255,255,0.03)' } }
+        }
+      }
+    });
+  }
+
+  // animate counters (display)
+  const prevBMR = Number(bmrDisplay.textContent) || 0;
+  const prevTDEE = Number(tdeeDisplay.textContent) || 0;
+  const prevDiff = Number(diffDisplay.textContent) || 0;
+
+  animateValue(bmrDisplay, prevBMR, Math.round(bmr));
+  animateValue(tdeeDisplay, prevTDEE, Math.round(tdee));
+  animateValue(diffDisplay, prevDiff, Math.round(diff));
+}
+
+/* -------------------------
+  Event bindings
+------------------------- */
+function triggerCalc() {
+  // compute & (if graphs open) update charts
+  const w = Number(weightInput.value) || 0;
+  const h = Number(heightInput.value) || 0;
+  const a = Number(ageInput.value) || 0;
+  const gender = genderInput.value;
+  const activity = Number(activityInput.value) || 1.2;
+  const intake = Number(calorieInput.value) || 0;
+
+  const bmr = calcBMR(w,h,a,gender);
+  const tdee = bmr * activity;
+  const diff = Math.round(tdee - intake);
+
+  // animate counters (display only)
+  const prevBMR = Number(bmrDisplay.textContent) || 0;
+  const prevTDEE = Number(tdeeDisplay.textContent) || 0;
+  const prevDiff = Number(diffDisplay.textContent) || 0;
+
+  animateValue(bmrDisplay, prevBMR, Math.round(bmr));
+  animateValue(tdeeDisplay, prevTDEE, Math.round(tdee));
+  animateValue(diffDisplay, prevDiff, Math.round(diff));
+
+  // if graphs panel active, update charts live
+  if (qs('#panel-graphs').classList.contains('active')) {
+    initOrUpdateCharts();
+  }
+}
+
+/* Live update as user types/selects */
+['input','change'].forEach(evt => {
+  [weightInput,heightInput,ageInput,genderInput,activityInput,calorieInput,goalInput].forEach(el=>{
+    if (!el) return;
+    el.addEventListener(evt, () => {
+      // small debounce: but for simplicity call directly
+      triggerCalc();
+    });
+  });
+});
+
+calcBtn.addEventListener('click', () => {
+  // open graphs automatically when pressing hitung
+  openPanel('panel-graphs');
+  initOrUpdateCharts();
+});
+
+resetBtn.addEventListener('click', () => {
+  weightInput.value = '';
+  heightInput.value = '';
+  ageInput.value = '';
+  calorieInput.value = '';
+  genderInput.value = 'male';
+  activityInput.value = '1.2';
+  goalInput.value = 'cutting';
+  animateValue(bmrDisplay, Number(bmrDisplay.textContent)||0, 0);
+  animateValue(tdeeDisplay, Number(tdeeDisplay.textContent)||0, 0);
+  animateValue(diffDisplay, Number(diffDisplay.textContent)||0, 0);
+  // update charts if open
+  if (qs('#panel-graphs').classList.contains('active')) initOrUpdateCharts();
+});
+
+/* Inisialisasi default */
+window.addEventListener('load', () => {
+  // tampilkan panel test
+  openPanel('panel-test');
+});
+</script>
+</body>
+</html>
