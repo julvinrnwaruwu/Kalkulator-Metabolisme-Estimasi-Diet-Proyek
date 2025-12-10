@@ -270,42 +270,6 @@ body{
   text-decoration: none;
   color: white;
 }
-.social {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-}
-
-/* Default: Mobile */
-.social a {
-    font-size: 26px;
-    transition: 0.3s;
-}
-
-/* Warna platform */
-.instagram { color: #E1306C; }
-.whatsapp  { color: #25D366; }
-.email     { color: #EA4335; }
-
-/* Tablet */
-@media (min-width: 768px) {
-    .social a {
-        font-size: 32px;
-    }
-}
-
-/* Desktop */
-@media (min-width: 1024px) {
-    .social a {
-        font-size: 36px;
-    }
-}
-
-/* Hover (desktop only tetap aman di mobile) */
-.social a:hover {
-    transform: scale(1.2);
-}
-
 /* Feature Box */
 .feature-box{
     display:flex;
@@ -423,19 +387,4 @@ body{
     border-left: 4px solid #00eaff;
     color: #00eaff;
     font-weight: bold;
-}
-@media(max-width: 800px){
-    main{
-        flex-direction: column;
-    }
-    .sidebar{
-        width: 100%;
-        flex-direction: row;
-        overflow-x: auto;
-        white-space: nowrap;
-    }
-    .sidebar button{
-        flex: 1;
-        min-width: 130px;
-    }
 }
