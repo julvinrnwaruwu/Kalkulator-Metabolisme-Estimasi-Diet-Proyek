@@ -12,10 +12,11 @@ body {
   color: #fff;
 }
 
-.container {
-  max-width: 1000px;
-  margin: auto;
-  padding: 40px;
+container {
+  width:100%;
+  max-width:none;
+  margin:0;
+  padding:40px;
 }
 
 h1 {
@@ -128,14 +129,13 @@ body{
 .btn.primary{ background: var(--accent); color:#012235; border: none; }
 .btn.ghost{ background: transparent; color:var(--muted); }
 
-/* main container */
-.container{ max-width:1200px; margin:28px auto; padding:0 18px; }
+
 
 /* panel */
 /* ====== PANEL PREMIUM (Upgrade 4 + Animasi + Glass UI) ====== */
 
 .panel{
-    display:none;
+    display:block;
     margin-bottom:28px;
     padding:24px;
     border-radius:14px;
@@ -387,4 +387,13 @@ body{
     border-left: 4px solid #00eaff;
     color: #00eaff;
     font-weight: bold;
+}
+html, body {
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 100%;
 }
