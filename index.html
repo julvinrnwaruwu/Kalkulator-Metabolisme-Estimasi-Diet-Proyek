@@ -244,181 +244,182 @@
         /* Semua script yang kamu kirim dimasukkan di sini TANPA mengubah logika */
 
         /* ————————— Utility ————————— */
-        const qs = v => document.querySelector(v);
-        const qsa = v => document.querySelectorAll(v);
+const qs = v => document.querySelector(v);
+const qsa = v => document.querySelectorAll(v);
 
-        let kaloriChart = null;
-        let weightChart = null;
+let kaloriChart = null;
+let weightChart = null;
 
-        /* Element DOM */
-        const panels = qsa('.panel');
-        const openButtons = qsa('[data-open]');
+/* Element DOM */
+const panels = qsa('.panel');
+const openButtons = qsa('[data-open]');
 
-        const weightInput = qs('#weight');
-        const heightInput = qs('#height');
-        const ageInput = qs('#age');
-        const genderInput = qs('#gender');
-        const activityInput = qs('#activity');
-        const calorieInput = qs('#calorie');
-        const goalInput = qs('#goal');
+const weightInput = qs('#weight');
+const heightInput = qs('#height');
+const ageInput = qs('#age');
+const genderInput = qs('#gender');
+const activityInput = qs('#activity');
+const calorieInput = qs('#calorie');
+const goalInput = qs('#goal');
 
-        const bmrDisplay = qs('#bmrValue');
-        const tdeeDisplay = qs('#tdeeValue');
-        const diffDisplay = qs('#diffValue');
+const bmrDisplay = qs('#bmrValue');
+const tdeeDisplay = qs('#tdeeValue');
+const diffDisplay = qs('#diffValue');
 
-        const calcBtn = qs('#calcBtn');
-        const resetBtn = qs('#resetBtn');
+const calcBtn = qs('#calcBtn');
+const resetBtn = qs('#resetBtn');
 
-        /* ————————— Panel open ————————— */
-        function openPanel(id) {
-            panels.forEach(p => p.classList.remove('active'));
-            qs('#' + id).classList.add('active');
+/* ————————— Panel open ————————— */
+function openPanel(id) {
+    panels.forEach(p => p.classList.remove('active'));
+    qs('#' + id).classList.add('active');
 
-            if (id === "panel-graphs") {
-                initOrUpdateCharts();
-            }
-        }
-
-        openButtons.forEach(btn =>
-            btn.addEventListener('click', () => openPanel(btn.dataset.open))
-        );
-
-        /* ————————— BMR Calc ————————— */
-        function calcBMR(w, h, a, gender) {
-  if (!w || !h || !a) return 0;
-
-  if (gender === "male") {
-    return (10 * w) + (6.25 * h) - (5 * a) + 5;
-  } else {
-    return (10 * w) + (6.25 * h) - (5 * a) - 161;
-  }
+    if (id === "panel-graphs") {
+        initOrUpdateCharts();
+    }
 }
 
-        function animateValue(el, start, end, duration=600) {
-            const range = end - start;
-            const startTime = performance.now();
+openButtons.forEach(btn =>
+    btn.addEventListener('click', () => openPanel(btn.dataset.open))
+);
 
-            function step(now) {
-                const progress = Math.min((now - startTime) / duration, 1);
-                el.textContent = Math.round(start + range * ((--progress)*progress*progress + 1));
-                if (progress < 1) requestAnimationFrame(step);
-            }
-            requestAnimationFrame(step);
-        }
+/* ————————— BMR Calc ————————— */
+function calcBMR(w, h, a, gender) {
+    if (!w || !h || !a) return 0;
 
-        /* ————————— Grafik Data ————————— */
-       function genKalori7days(tdee) {
+    if (gender === "male") {
+        return (10 * w) + (6.25 * h) - (5 * a) + 5;
+    } else {
+        return (10 * w) + (6.25 * h) - (5 * a) - 161;
+    }
+}
+
+function animateValue(el, start, end, duration = 600) {
+    const range = end - start;
+    const startTime = performance.now();
+
+    function step(now) {
+        const progress = Math.min((now - startTime) / duration, 1);
+        el.textContent = Math.round(start + range * ((--progress) * progress * progress + 1));
+        if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+}
+
+/* ————————— Grafik Data ————————— */
+function genKalori7days(tdee) {
     return Array(7).fill(Math.round(tdee));
 }
 
-        function genWeight30days(initialWeight, diff) {
+function genWeight30days(initialWeight, diff) {
     const arr = [];
     let w = Number(initialWeight);
-    const kgPerDay = diff / 7700;  // 7700 kCal = 1 kg
+    const kgPerDay = diff / 7700; // 7700 kCal = 1 kg
 
-    for (let i=0; i<30; i++) {
+    for (let i = 0; i < 30; i++) {
         w += kgPerDay;
         arr.push(Number(w.toFixed(1)));
     }
     return arr;
 }
 
-        /* ————————— Update Grafik ————————— */
-        function initOrUpdateCharts() {
+/* ————————— Update Grafik ————————— */
+function initOrUpdateCharts() {
 
-            const w = Number(weightInput.value);
-            const h = Number(heightInput.value);
-            const a = Number(ageInput.value);
-            const g = genderInput.value;
-            const ac = Number(activityInput.value);
-            const intake = Number(calorieInput.value);
+    const w = Number(weightInput.value);
+    const h = Number(heightInput.value);
+    const a = Number(ageInput.value);
+    const g = genderInput.value;
+    const ac = Number(activityInput.value);
+    const intake = Number(calorieInput.value);
 
-            const bmr = calcBMR(w,h,a,g);
-            const tdee = bmr * ac;
-          const diff = Math.round(intake - tdee);
+    const bmr = calcBMR(w, h, a, g);
+    const tdee = bmr * ac;
+    const diff = Math.round(intake - tdee);
 
+    // Update display animasi
+    animateValue(bmrDisplay, Number(bmrDisplay.textContent) || 0, Math.round(bmr));
+    animateValue(tdeeDisplay, Number(tdeeDisplay.textContent) || 0, Math.round(tdee));
+    animateValue(diffDisplay, Number(diffDisplay.textContent) || 0, diff);
 
-            // Update display animasi
-            animateValue(bmrDisplay, Number(bmrDisplay.textContent)||0, Math.round(bmr));
-            animateValue(tdeeDisplay, Number(tdeeDisplay.textContent)||0, Math.round(tdee));
-            animateValue(diffDisplay, Number(diffDisplay.textContent)||0, diff);
+    const kaloriData = genKalori7days(tdee);
+    const weightData = genWeight30days(w, diff);
 
-            const kaloriData = genKalori7days(tdee);
-            const weightData = genWeight30days(w, diff);
+    const kaloriCtx = qs('#kaloriChart').getContext('2d');
+    const weightCtx = qs('#weightChart').getContext('2d');
 
-            const kaloriCtx = qs('#kaloriChart').getContext('2d');
-            const weightCtx = qs('#weightChart').getContext('2d');
-
-            // Chart kalori
-            if (kaloriChart) {
-                kaloriChart.data.datasets[0].data = kaloriData;
-                kaloriChart.update();
-            } else {
-                kaloriChart = new Chart(kaloriCtx, {
-                    type: 'line',
-                    data: {
-                        labels: ["Hari 1","Hari 2","Hari 3","Hari 4","Hari 5","Hari 6","Hari 7"],
-                        datasets: [{
-                            label: "Estimasi Kalori Terbakar",
-                            data: kaloriData,
-                            borderColor: "#4aa2e9",
-                            backgroundColor: "rgba(74,162,233,0.12)",
-                            tension: 0.4,
-                            fill: true
-                        }]
-                    }
-                });
-            }
-
-            // Chart berat
-            if (weightChart) {
-                weightChart.data.datasets[0].data = weightData;
-                weightChart.update();
-            } else {
-                weightChart = new Chart(weightCtx, {
-                    type: 'line',
-                    data: {
-                        labels: Array.from({length:30}, (_,i)=>`Hari ${i+1}`),
-                        datasets: [{
-                            label: "Prediksi Berat (kg)",
-                            data: weightData,
-                            borderColor: "#ffd166",
-                            backgroundColor: "rgba(255,209,102,0.06)",
-                            tension: 0.35,
-                            fill: true
-                        }]
-                    }
-                });
-            }
-        }
-
-        /* ————————— Event ————————— */
-        calcBtn.addEventListener("click", () => {
-            openPanel("panel-graphs");
-            initOrUpdateCharts();
-        });
-
-        resetBtn.addEventListener("click", () => {
-            weightInput.value = "";
-            heightInput.value = "";
-            ageInput.value = "";
-            calorieInput.value = "";
-            genderInput.value = "male";
-            activityInput.value = "1.2";
-
-            animateValue(bmrDisplay, Number(bmrDisplay.textContent)||0, 0);
-            animateValue(tdeeDisplay, Number(tdeeDisplay.textContent)||0, 0);
-            animateValue(diffDisplay, Number(diffDisplay.textContent)||0, 0);
-
-            if (qs('#panel-graphs').classList.contains('active')) {
-                initOrUpdateCharts();
+    // Chart Kalori
+    if (kaloriChart) {
+        kaloriChart.data.datasets[0].data = kaloriData;
+        kaloriChart.update();
+    } else {
+        kaloriChart = new Chart(kaloriCtx, {
+            type: 'line',
+            data: {
+                labels: ["Hari 1","Hari 2","Hari 3","Hari 4","Hari 5","Hari 6","Hari 7"],
+                datasets: [{
+                    label: "Estimasi Kalori Terbakar",
+                    data: kaloriData,
+                    borderColor: "#4aa2e9",
+                    backgroundColor: "rgba(74,162,233,0.12)",
+                    tension: 0.4,
+                    fill: true
+                }]
             }
         });
+    }
 
-        window.addEventListener("load", () => openPanel("panel-test"));
+    // Chart Berat
+    if (weightChart) {
+        weightChart.data.datasets[0].data = weightData;
+        weightChart.update();
+    } else {
+        weightChart = new Chart(weightCtx, {
+            type: 'line',
+            data: {
+                labels: Array.from({ length: 30 }, (_, i) => `Hari ${i + 1}`),
+                datasets: [{
+                    label: "Prediksi Berat (kg)",
+                    data: weightData,
+                    borderColor: "#ffd166",
+                    backgroundColor: "rgba(255,209,102,0.06)",
+                    tension: 0.35,
+                    fill: true
+                }]
+            }
+        });
+    }
+}
+
+/* ————————— Event ————————— */
+calcBtn.addEventListener("click", () => {
+    openPanel("panel-graphs");
+    initOrUpdateCharts();
+});
+
+resetBtn.addEventListener("click", () => {
+    weightInput.value = "";
+    heightInput.value = "";
+    ageInput.value = "";
+    calorieInput.value = "";
+    genderInput.value = "male";
+    activityInput.value = "1.2";
+
+    animateValue(bmrDisplay, Number(bmrDisplay.textContent) || 0, 0);
+    animateValue(tdeeDisplay, Number(tdeeDisplay.textContent) || 0, 0);
+    animateValue(diffDisplay, Number(diffDisplay.textContent) || 0, 0);
+
+    if (qs('#panel-graphs').classList.contains('active')) {
+        initOrUpdateCharts();
+    }
+});
+
+window.addEventListener("load", () => openPanel("panel-test"));
+
     </script>
 
 </body>
 </html>
+
 
 
