@@ -307,28 +307,25 @@
         }
 
         /* ————————— Grafik Data ————————— */
-        function genKalori7days(tdee) {
-            const arr = [];
-            for (let i=0;i<7;i++){
-                function genKalori7days(tdee) {
-  return Array(7).fill(Math.round(tdee));
+       function genKalori7days(tdee) {
+    return Array(7).fill(Math.round(tdee));
 }
+
 
             return arr;
         }
 
         function genWeight30days(initialWeight, diff) {
-            const arr = [];
-            let w = Number(initialWeight);
-const kgPerDay = (dailyCalDiff) / 7700;
+    const arr = [];
+    let w = Number(initialWeight);
+    const kgPerDay = diff / 7700;  // 7700 kCal = 1 kg
 
-
-            for (let i=0;i<30;i++){
-                w += kgPerDay;
-                arr.push(Number(w.toFixed(1)));
-            }
-            return arr;
-        }
+    for (let i=0; i<30; i++) {
+        w += kgPerDay;
+        arr.push(Number(w.toFixed(1)));
+    }
+    return arr;
+}
 
         /* ————————— Update Grafik ————————— */
         function initOrUpdateCharts() {
@@ -427,3 +424,4 @@ const kgPerDay = (dailyCalDiff) / 7700;
 
 </body>
 </html>
+
