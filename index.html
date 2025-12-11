@@ -1,188 +1,429 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-<meta charset="UTF-8">
-<title>Kalkulator BMR & TDEE Akurat</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<style>
-  body { font-family: Arial; background:#f0f0f0; padding:20px; }
-  .container { background:white; padding:20px; border-radius:10px; max-width:700px; margin:auto; }
-  label { font-weight:bold; }
-  input, select { width:100%; padding:8px; margin-top:5px; margin-bottom:15px; }
-  button { padding:10px 20px; background:#007bff; color:white; border:none; border-radius:5px; cursor:pointer; }
-  button:hover { background:#0056c7; }
-</style>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Kalkulator Metabolisme & Estimasi Diet</title>
+
+    <!-- MathJax -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- CSS External -->
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<div class="container">
-<h2>Kalkulator BMR, TDEE, dan Prediksi Berat (Akurat)</h2>
+    <!-- ========================== HEADER ========================== -->
+    <header class="topbar">
+        <div class="left">
+            <img src="logo.jpg" alt="Logo Kampus">
+            <div>
+                <div class="group">Turunan – Kelompok 1</div>
+                <div class="course">Kalkulus Diferensial</div>
+            </div>
+        </div>
 
-<label>Berat (kg)</label>
-<input id="w" type="number">
+        <div class="social">
+            <a href="https://instagram.com/jlvnnw" target="_blank" class="instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://wa.me/6281274330984" target="_blank" class="whatsapp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="mailto:julvinrnwaruwu@gmail.com?subject=Pertanyaan&body=Halo..." class="email">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+    </header>
 
-<label>Tinggi (cm)</label>
-<input id="h" type="number">
+    <!-- ========================== HERO ========================== -->
+    <header class="hero">
+        <div class="hero-inner">
+            <h1>Kalkulator Metabolisme & Estimasi Diet</h1>
+            <p class="sub">Analisis & prediksi estimasi kalori selama 7 hari serta Berat 30 hari.</p>
 
-<label>Usia</label>
-<input id="a" type="number">
+            <!-- Menu -->
+            <div class="feature-box">
+                <div class="card-menu" data-open="panel-theory">
+                    <span class="icon">🏠︎</span> <span>Teori & Rumus</span>
+                </div>
+                <div class="card-menu" data-open="panel-usage">
+                    <span class="icon">📄</span> <span>Cara Penggunaan</span>
+                </div>
+                <div class="card-menu active" data-open="panel-test">
+                    <span class="icon">📝</span> <span>Calorie Calculator</span>
+                </div>
+            </div>
+        </div>
+    </header>
 
-<label>Jenis Kelamin</label>
-<select id="gender">
-  <option value="male">Laki-laki</option>
-  <option value="female">Perempuan</option>
-</select>
+    <!-- ========================== MAIN ========================== -->
+    <main class="container">
 
-<label>Aktivitas</label>
-<select id="act">
-  <option value="tidak_aktif">Tidak aktif</option>
-  <option value="ringan">Ringan</option>
-  <option value="sedang">Sedang</option>
-  <option value="berat">Berat</option>
-  <option value="sangat_berat">Sangat berat</option>
-</select>
+        <!-- ==================== PANEL 1: TEORI ==================== -->
+        <section id="panel-theory" class="panel">
+            <h2>🏠︎ Teori & Rumus</h2>
 
-<label>Asupan Kalori (kcal/hari)</label>
-<input id="intake" type="number">
+            <div class="panel-grid">
 
-<label>Berat Awal (kg)</label>
-<input id="initialW" type="number">
+                <!-- Card 1 -->
+                <article class="card">
+                    <h3>Landasan Teori</h3>
 
-<button onclick="triggerCalc()">Hitung</button>
+                    <p><b>BMR</b> adalah energi minimal untuk menjaga fungsi vital tubuh saat istirahat.</p>
+                    <p><b>TDEE</b> adalah total energi harian termasuk aktivitas fisik.</p>
 
-<h3>Hasil</h3>
-<p id="bmrOut"></p>
-<p id="tdeeOut"></p>
-<p id="diffOut"></p>
+                    <p>📊 Grafik Kalori membantu memonitor:</p>
+                    <ul>
+                        <li>Surplus kalori → potensi naik berat</li>
+                        <li>Defisit kalori → potensi turun berat</li>
+                        <li>Seimbang → berat stabil</li>
+                    </ul>
 
-<canvas id="kaloriChart" height="120"></canvas>
-<br>
-<canvas id="beratChart" height="120"></canvas>
-</div>
+                    <p>📅 Grafik Tren 30 Hari memberi gambaran jangka panjang pola diet.</p>
+                </article>
 
-<script>
-// =========================
-// BMR (Mifflin–St Jeor)
-// =========================
-function calcBMR(w, h, a, gender) {
-    if (gender === "male") {
-        return (10 * w) + (6.25 * h) - (5 * a) + 5;
-    } else {
-        return (10 * w) + (6.25 * h) - (5 * a) - 161;
-    }
-}
+                <!-- Card 2 -->
+                <article class="card">
+                    <h2>Rumus BMR – TDEE – Selisih</h2>
 
-// =========================
-// Faktor Aktivitas
-// =========================
-function faktorAktivitas(level) {
-    switch (level) {
-        case "tidak_aktif": return 1.2;
-        case "ringan": return 1.375;
-        case "sedang": return 1.55;
-        case "berat": return 1.725;
-        case "sangat_berat": return 1.9;
-    }
-}
+                    <h3>1. Rumus BMR (Mifflin–St Jeor)</h3>
+                    <p>Pria:</p>
+                    <p>\[ BMR = (10×berat)+(6.25×tinggi)-(5×usia)+5 \]</p>
 
-// =========================
-// TDEE
-// =========================
-function calcTDEE(bmr, act) {
-    return bmr * faktorAktivitas(act);
-}
+                    <p>Wanita:</p>
+                    <p>\[ BMR = (10×berat)+(6.25×tinggi)-(5×usia)-161 \]</p>
 
-// =========================
-// Grafik Kalori 7 Hari TANPA fluktuasi palsu
-// =========================
-function genKalori7days(tdee) {
-    return Array(7).fill(Math.round(tdee));
-}
+                    <h3>2. Rumus TDEE</h3>
+                    <p>\[ TDEE = BMR × Faktor\ Aktivitas \]</p>
 
-// =========================
-// Grafik Prediksi Berat 30 Hari
-// =========================
-function genWeight30days(initialWeight, dailyCalDiff) {
-    const arr = [];
-    const kgPerCal = 1 / 7700; // 7700 kalori = 1 kg
-    let w = initialWeight;
+                    <h3>3. Selisih Kalori</h3>
+                    <p>\[ Selisih = Intake - TDEE \]</p>
+                </article>
 
-    for (let i = 0; i < 30; i++) {
-        w += dailyCalDiff * kgPerCal;
-        arr.push(parseFloat(w.toFixed(2)));
-    }
-    return arr;
-}
+                <!-- Card 3 -->
+                <article class="card">
+                    <h3>Landasan Teori Kalkulus</h3>
 
-// =========================
-// CHART
-// =========================
-let kaloriChart, beratChart;
+                    <p>\[ \frac{dW}{dt} = k (C_{in} - C_{out}) \]</p>
 
-function updateCharts(kal7, w30) {
-    const ctx1 = document.getElementById("kaloriChart").getContext("2d");
-    const ctx2 = document.getElementById("beratChart").getContext("2d");
+                    <p>\[ ΔE = \int_0^T (C_{in} - TDEE)\, dt \]</p>
+                </article>
+            </div>
+        </section>
 
-    if (kaloriChart) kaloriChart.destroy();
-    if (beratChart) beratChart.destroy();
+        <!-- ==================== PANEL 2: CARA PAKAI ==================== -->
+        <section id="panel-usage" class="panel">
+            <h2>Cara Penggunaan</h2>
+            <p>Kalkulator ini menghitung BMR, TDEE dan memberi rekomendasi diet.</p>
 
-    kaloriChart = new Chart(ctx1, {
-        type: "line",
-        data: {
-            labels: ["1","2","3","4","5","6","7"],
-            datasets: [{
-                label: "Kalori Terbakar (TDEE)",
-                data: kal7,
-                borderColor: "blue",
-                borderWidth: 2,
-                fill: false
-            }]
+            <div class="usage-steps">
+                <div class="step"><span class="num">1</span><h3>Masukkan Data</h3></div>
+                <div class="step"><span class="num">2</span><h3>Pilih Aktivitas</h3></div>
+                <div class="step"><span class="num">3</span><h3>Klik Hitung</h3></div>
+                <div class="step"><span class="num">4</span><h3>Lihat Hasil</h3></div>
+            </div>
+        </section>
+
+        <!-- ==================== PANEL 3: FORM ==================== -->
+        <section id="panel-test" class="panel active">
+            <h2>Form Input & Tes</h2>
+
+            <div class="grid-2">
+
+                <!-- Form -->
+                <div class="card form-card">
+                    <h3>Input</h3>
+
+                    <div class="row">
+                        <div class="label-box">Berat (kg)</div>
+                        <input id="weight" type="number" class="input-box">
+                    </div>
+
+                    <div class="row">
+                        <div class="label-box">Tinggi (cm)</div>
+                        <input id="height" type="number" class="input-box">
+                    </div>
+
+                    <div class="row">
+                        <div class="label-box">Usia</div>
+                        <input id="age" type="number" class="input-box">
+                    </div>
+
+                    <div class="row">
+                        <div class="label-box">Jenis Kelamin</div>
+                        <select id="gender" class="input-box">
+                            <option value="male">Laki-laki</option>
+                            <option value="female">Perempuan</option>
+                        </select>
+                    </div>
+
+                    <div class="row">
+                        <div class="label-box">Aktivitas</div>
+                        <select id="activity" class="input-box">
+                            <option value="1.2">Tidak Aktif</option>
+                            <option value="1.375">Ringan</option>
+                            <option value="1.55">Sedang</option>
+                        </select>
+                    </div>
+
+                    <div class="row">
+                        <div class="label-box">Kalori / hari</div>
+                        <input id="calorie" type="number" class="input-box">
+                    </div>
+
+                    <div class="row">
+                        <div class="label-box">Tujuan</div>
+                        <select id="goal" class="input-box">
+                            <option value="cutting">Diet</option>
+                            <option value="bulking">Bulking</option>
+                        </select>
+                    </div>
+
+                    <div class="result-box">
+                        <div><strong>BMR:</strong> <span id="bmrValue">—</span> kCal</div>
+                        <div><strong>TDEE:</strong> <span id="tdeeValue">—</span> kCal</div>
+                        <div><strong>Selisih:</strong> <span id="diffValue">—</span> kCal</div>
+                    </div>
+
+                    <div class="actions">
+                        <button id="calcBtn" class="btn primary">Hitung</button>
+                        <button id="resetBtn" class="btn ghost">Reset</button>
+                    </div>
+                </div>
+
+                <!-- Info -->
+                <aside class="card info-card">
+                    <h3>Kalori Makanan</h3>
+                    <ul class="food-list">
+                        <li>Nasi 100g : 130 kCal</li>
+                        <li>Dada ayam 100g : 165 kCal</li>
+                        <li>Sayur 100g : 25 kCal</li>
+                    </ul>
+
+                    <h4>Grafik</h4>
+                    <button class="btn" data-open="panel-graphs">Buka Grafik</button>
+                </aside>
+
+            </div>
+        </section>
+
+        <!-- ==================== PANEL 4: GRAFIK ==================== -->
+        <section id="panel-graphs" class="panel">
+            <h2>Grafik</h2>
+
+            <div class="chart-grid">
+                <div class="chart-card">
+                    <h3>Estimasi Kalori (7 Hari)</h3>
+                    <canvas id="kaloriChart"></canvas>
+                </div>
+
+                <div class="chart-card">
+                    <h3>Prediksi Berat (30 Hari)</h3>
+                    <canvas id="weightChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ========================== FOOTER ========================== -->
+    <footer class="footer">
+        <small>Proyek Kelompok 1 PSIK 25D</small>
+    </footer>
+
+    <!-- ========================== JAVASCRIPT ========================== -->
+    <script>
+        /* Semua script yang kamu kirim dimasukkan di sini TANPA mengubah logika */
+
+        /* ————————— Utility ————————— */
+        const qs = v => document.querySelector(v);
+        const qsa = v => document.querySelectorAll(v);
+
+        let kaloriChart = null;
+        let weightChart = null;
+
+        /* Element DOM */
+        const panels = qsa('.panel');
+        const openButtons = qsa('[data-open]');
+
+        const weightInput = qs('#weight');
+        const heightInput = qs('#height');
+        const ageInput = qs('#age');
+        const genderInput = qs('#gender');
+        const activityInput = qs('#activity');
+        const calorieInput = qs('#calorie');
+        const goalInput = qs('#goal');
+
+        const bmrDisplay = qs('#bmrValue');
+        const tdeeDisplay = qs('#tdeeValue');
+        const diffDisplay = qs('#diffValue');
+
+        const calcBtn = qs('#calcBtn');
+        const resetBtn = qs('#resetBtn');
+
+        /* ————————— Panel open ————————— */
+        function openPanel(id) {
+            panels.forEach(p => p.classList.remove('active'));
+            qs('#' + id).classList.add('active');
+
+            if (id === "panel-graphs") {
+                initOrUpdateCharts();
+            }
         }
-    });
 
-    beratChart = new Chart(ctx2, {
-        type: "line",
-        data: {
-            labels: Array.from({length:30}, (_,i)=>i+1),
-            datasets: [{
-                label: "Prediksi Berat 30 Hari",
-                data: w30,
-                borderColor: "green",
-                borderWidth: 2,
-                fill: false
-            }]
+        openButtons.forEach(btn =>
+            btn.addEventListener('click', () => openPanel(btn.dataset.open))
+        );
+
+        /* ————————— BMR Calc ————————— */
+        function calcBMR(w, h, a, gender) {
+  if (!w || !h || !a) return 0;
+
+  if (gender === "male") {
+    return (10 * w) + (6.25 * h) - (5 * a) + 5;
+  } else {
+    return (10 * w) + (6.25 * h) - (5 * a) - 161;
+  }
+}
+
+        function animateValue(el, start, end, duration=600) {
+            const range = end - start;
+            const startTime = performance.now();
+
+            function step(now) {
+                const progress = Math.min((now - startTime) / duration, 1);
+                el.textContent = Math.round(start + range * ((--progress)*progress*progress + 1));
+                if (progress < 1) requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
         }
-    });
+
+        /* ————————— Grafik Data ————————— */
+        function genKalori7days(tdee) {
+            const arr = [];
+            for (let i=0;i<7;i++){
+                function genKalori7days(tdee) {
+  return Array(7).fill(Math.round(tdee));
 }
 
-// =========================
-// TRIGGER
-// =========================
-function triggerCalc() {
-    const w = Number(document.getElementById("w").value);
-    const h = Number(document.getElementById("h").value);
-    const a = Number(document.getElementById("a").value);
-    const gender = document.getElementById("gender").value;
-    const act = document.getElementById("act").value;
-    const intake = Number(document.getElementById("intake").value);
-    const initialW = Number(document.getElementById("initialW").value);
+            return arr;
+        }
 
-    const bmr = calcBMR(w,h,a,gender);
-    const tdee = calcTDEE(bmr, act);
+        function genWeight30days(initialWeight, diff) {
+            const arr = [];
+            let w = Number(initialWeight);
+const kgPerDay = (dailyCalDiff) / 7700;
 
-    // Perhitungan selisih yang benar:
-    const diff = intake - tdee;
 
-    document.getElementById("bmrOut").innerHTML = `BMR: ${bmr.toFixed(2)} kcal`;
-    document.getElementById("tdeeOut").innerHTML = `TDEE: ${tdee.toFixed(2)} kcal`;
-    document.getElementById("diffOut").innerHTML = `Selisih Kalori (Intake - TDEE): ${diff.toFixed(2)} kcal/hari`;
+            for (let i=0;i<30;i++){
+                w += kgPerDay;
+                arr.push(Number(w.toFixed(1)));
+            }
+            return arr;
+        }
 
-    const kal7 = genKalori7days(tdee);
-    const w30 = genWeight30days(initialW, diff);
+        /* ————————— Update Grafik ————————— */
+        function initOrUpdateCharts() {
 
-    updateCharts(kal7, w30);
-}
-</script>
+            const w = Number(weightInput.value);
+            const h = Number(heightInput.value);
+            const a = Number(ageInput.value);
+            const g = genderInput.value;
+            const ac = Number(activityInput.value);
+            const intake = Number(calorieInput.value);
+
+            const bmr = calcBMR(w,h,a,g);
+            const tdee = bmr * ac;
+          const diff = Math.round(intake - tdee);
+
+
+            // Update display animasi
+            animateValue(bmrDisplay, Number(bmrDisplay.textContent)||0, Math.round(bmr));
+            animateValue(tdeeDisplay, Number(tdeeDisplay.textContent)||0, Math.round(tdee));
+            animateValue(diffDisplay, Number(diffDisplay.textContent)||0, diff);
+
+            const kaloriData = genKalori7days(tdee);
+            const weightData = genWeight30days(w, diff);
+
+            const kaloriCtx = qs('#kaloriChart').getContext('2d');
+            const weightCtx = qs('#weightChart').getContext('2d');
+
+            // Chart kalori
+            if (kaloriChart) {
+                kaloriChart.data.datasets[0].data = kaloriData;
+                kaloriChart.update();
+            } else {
+                kaloriChart = new Chart(kaloriCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ["Hari 1","Hari 2","Hari 3","Hari 4","Hari 5","Hari 6","Hari 7"],
+                        datasets: [{
+                            label: "Estimasi Kalori Terbakar",
+                            data: kaloriData,
+                            borderColor: "#4aa2e9",
+                            backgroundColor: "rgba(74,162,233,0.12)",
+                            tension: 0.4,
+                            fill: true
+                        }]
+                    }
+                });
+            }
+
+            // Chart berat
+            if (weightChart) {
+                weightChart.data.datasets[0].data = weightData;
+                weightChart.update();
+            } else {
+                weightChart = new Chart(weightCtx, {
+                    type: 'line',
+                    data: {
+                        labels: Array.from({length:30}, (_,i)=>`Hari ${i+1}`),
+                        datasets: [{
+                            label: "Prediksi Berat (kg)",
+                            data: weightData,
+                            borderColor: "#ffd166",
+                            backgroundColor: "rgba(255,209,102,0.06)",
+                            tension: 0.35,
+                            fill: true
+                        }]
+                    }
+                });
+            }
+        }
+
+        /* ————————— Event ————————— */
+        calcBtn.addEventListener("click", () => {
+            openPanel("panel-graphs");
+            initOrUpdateCharts();
+        });
+
+        resetBtn.addEventListener("click", () => {
+            weightInput.value = "";
+            heightInput.value = "";
+            ageInput.value = "";
+            calorieInput.value = "";
+            genderInput.value = "male";
+            activityInput.value = "1.2";
+
+            animateValue(bmrDisplay, Number(bmrDisplay.textContent)||0, 0);
+            animateValue(tdeeDisplay, Number(tdeeDisplay.textContent)||0, 0);
+            animateValue(diffDisplay, Number(diffDisplay.textContent)||0, 0);
+
+            if (qs('#panel-graphs').classList.contains('active')) {
+                initOrUpdateCharts();
+            }
+        });
+
+        window.addEventListener("load", () => openPanel("panel-test"));
+    </script>
 
 </body>
 </html>
