@@ -24,14 +24,6 @@ h1 {
   margin-bottom: 40px;
 }
 
-.panel {
-  background: rgba(255,255,255,0.06);
-  padding: 24px;
-  border-radius: 14px;
-  margin-bottom: 32px;
-  backdrop-filter: blur(8px);
-}
-
 .form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -136,20 +128,21 @@ body{
 /* ====== PANEL PREMIUM (Upgrade 4 + Animasi + Glass UI) ====== */
 
 .panel{
-    display:block;
+    display:none !important;
     margin-bottom:28px;
     padding:24px;
     border-radius:14px;
     background: rgba(255,255,255,0.06);          /* Glass Transparency */
     backdrop-filter: blur(15px);                  /* Blur efek elegan */
     border: 1px solid rgba(255,255,255,0.12);
+    opacity: 0;
 }
 
 .panel.active{
-    display:block;
+    display:block !important;
     opacity:100;
     transform:none;
-    animation:fadeUp .28s ease both;
+    animation: fadeUp 0.3s ease both;
 }
 @keyframes fadeUp{ from{opacity:0; transform:translateY(8px)} to{opacity:50; transform:none} }
 
@@ -402,6 +395,7 @@ html, body {
     margin: 0 auto;
     padding: 20px;
 }
+
 
 
 
