@@ -144,7 +144,6 @@ body{
     border: 1px solid rgba(255,255,255,0.12);
     
     /* Upgrade 1 transisi */
-    opacity:100;
     transform:translateY(10px);
     transition: opacity .4s ease, transform .4s ease;
 }
@@ -288,6 +287,7 @@ body{
     backdrop-filter:blur(8px);
     border-radius:15px;
     border:1px solid rgba(255,255,255,.35);
+    shadow: 10px;
     cursor:pointer;
     font-weight:600;
     transition:.25s;
@@ -397,5 +397,6 @@ html, body {
 .container {
   max-width: 100%;
 }
+
 
 
