@@ -151,7 +151,7 @@ body{
 
 .panel.active{
     display:block;
-    opacity:1;
+    opacity:100;
     transform:none;
     animation:fadeUp .28s ease both;
 }
@@ -397,3 +397,4 @@ html, body {
 .container {
   max-width: 100%;
 }
+
