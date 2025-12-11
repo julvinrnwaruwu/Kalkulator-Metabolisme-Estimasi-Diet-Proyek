@@ -163,7 +163,7 @@ body{
 }
 .card h3{ margin:0 0 8px; font-size:16px; color:#e9f6ff }
 
-.card p{
+.rumus{
   font-size:10px;
 }
 /* layout for form panel */
@@ -398,6 +398,7 @@ html, body {
     margin: 0 auto;
     padding: 20px;
 }
+
 
 
 
