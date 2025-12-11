@@ -171,6 +171,8 @@
                             <option value="1.2">Tidak Aktif</option>
                             <option value="1.375">Ringan</option>
                             <option value="1.55">Sedang</option>
+                            <option value="1.725">Berat</option>
+                            <option value="1.9">Atlet</option>
                         </select>
                     </div>
 
@@ -300,11 +302,12 @@ function animateValue(el, start, end, duration = 600) {
 
     function step(now) {
         const progress = Math.min((now - startTime) / duration, 1);
-        el.textContent = Math.round(start + range * ((--progress) * progress * progress + 1));
+        el.textContent = Math.round(start + range * progress);
         if (progress < 1) requestAnimationFrame(step);
     }
     requestAnimationFrame(step);
 }
+
 
 /* ————————— Grafik Data ————————— */
 function genKalori7days(tdee) {
@@ -420,6 +423,7 @@ window.addEventListener("load", () => openPanel("panel-test"));
 
 </body>
 </html>
+
 
 
 
